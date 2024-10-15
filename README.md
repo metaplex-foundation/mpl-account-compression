@@ -34,7 +34,8 @@ With a built local SDK, the test suite can be ran with:
 2. `pnpm i`
 3. `pnpm test`
 
-## Audit
+## Security
 
-The repository [README](https://github.com/solana-labs/solana-program-library#audits)
-contains information about program audits.
+The most recent security audit of Account Compression was completed 2022-12-05 by OtterShield.
+
+This audit was completed while the programs were part of the Solana Program Library.  See this [README](https://github.com/solana-labs/solana-program-library#audits) for more information.
