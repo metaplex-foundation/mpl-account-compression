@@ -10,6 +10,10 @@ Note: Using this program requires an indexer to parse transaction information an
 
 A _**rough draft**_ of the whitepaper for SPL ConcurrentMerkleTree's can be found [here](https://drive.google.com/file/d/1BOpa5OFmara50fTvL0VIVYjtg-qzHCVc/view).
 
+## NOTICE
+
+This repo is a modified fork of the [original repository](https://github.com/solana-labs/solana-program-library/tree/master/account-compression) published by Solana Labs, Inc. under the Apache 2.0 License.  Modifications to the original repository are made by the Metaplex Foundation to diverge from the behavior of the original implementation. Such modifications are made available for review in the commit history.
+
 ## Rust Packages
 
 * `spl-account-compression`: SDK for interacting with account compression program
