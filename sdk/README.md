@@ -6,13 +6,13 @@ For more information, see the full [Solana account compression SDK documentation
 ## Install
 
 ```shell
-npm install --save @metaplex-foundation/mpl-account-compression @solana/web3.js
+npm install --save @metaplex-foundation/mpl-account-compression @solana/web3.js@1
 ```
 
 __OR__
 
 ```shell
-yarn add @metaplex-foundation/mpl-account-compression @solana/web3.js
+yarn add @metaplex-foundation/mpl-account-compression @solana/web3.js@1
 ```
 
 ## Information
