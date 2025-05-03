@@ -3,12 +3,9 @@ import { Connection, PublicKey, SystemProgram, TransactionInstruction } from '@s
 import { getConcurrentMerkleTreeAccountSize } from '../accounts';
 import { MPL_NOOP_PROGRAM_ID, ValidDepthSizePair } from '../constants';
 import {
-    createAppendCanopyNodesInstruction,
     createAppendInstruction,
     createCloseEmptyTreeInstruction,
     createInitEmptyMerkleTreeInstruction,
-    createInitPreparedTreeWithRootInstruction,
-    createPrepareBatchMerkleTreeInstruction,
     createReplaceLeafInstruction,
     createTransferAuthorityInstruction,
     createVerifyLeafInstruction,
@@ -53,94 +50,6 @@ export function createInitEmptyMerkleTreeIx(
             noop: MPL_NOOP_PROGRAM_ID,
         },
         depthSizePair,
-    );
-}
-
-/**
- * (Devnet only) Helper function for {@link createPrepareBatchMerkleTreeInstruction}
- * @param merkleTree
- * @param authority
- * @param depthSizePair
- * @returns
- */
-export function prepareTreeIx(
-    merkleTree: PublicKey,
-    authority: PublicKey,
-    depthSizePair: ValidDepthSizePair,
-): TransactionInstruction {
-    return createPrepareBatchMerkleTreeInstruction(
-        {
-            authority: authority,
-            merkleTree,
-            noop: MPL_NOOP_PROGRAM_ID,
-        },
-        depthSizePair,
-    );
-}
-
-/**
- * (Devnet only) Helper function for {@link createAppendCanopyNodesInstruction}
- * @param merkleTree
- * @param authority
- * @param canopyNodes
- * @param startIndex
- * @returns
- */
-export function createAppendCanopyNodesIx(
-    merkleTree: PublicKey,
-    authority: PublicKey,
-    canopyNodes: ArrayLike<number>[] | Buffer[],
-    startIndex: number,
-): TransactionInstruction {
-    return createAppendCanopyNodesInstruction(
-        {
-            authority,
-            merkleTree,
-            noop: MPL_NOOP_PROGRAM_ID,
-        },
-        {
-            canopyNodes: canopyNodes.map(node => Array.from(node)),
-            startIndex,
-        },
-    );
-}
-
-/**
- * (Devnet only) Helper function for {@link createInitPreparedTreeWithRootInstruction}
- * @param merkleTree
- * @param authority
- * @param root
- * @param rightmostLeaf
- * @param rightmostIndex
- * @param proof
- * @returns
- */
-export function createInitPreparedTreeWithRootIx(
-    merkleTree: PublicKey,
-    authority: PublicKey,
-    root: ArrayLike<number> | Buffer,
-    rightmostLeaf: ArrayLike<number> | Buffer,
-    rightmostIndex: number,
-    proof: Buffer[],
-): TransactionInstruction {
-    return createInitPreparedTreeWithRootInstruction(
-        {
-            anchorRemainingAccounts: proof.map(node => {
-                return {
-                    isSigner: false,
-                    isWritable: false,
-                    pubkey: new PublicKey(node),
-                };
-            }),
-            authority,
-            merkleTree,
-            noop: MPL_NOOP_PROGRAM_ID,
-        },
-        {
-            rightmostIndex,
-            rightmostLeaf: Array.from(rightmostLeaf),
-            root: Array.from(root),
-        },
     );
 }
 

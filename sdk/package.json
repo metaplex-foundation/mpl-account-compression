@@ -40,7 +40,7 @@
     "lint:fix": "eslint . --fix --ext .js,.ts",
     "docs": "rm -rf docs/ && typedoc --out docs",
     "deploy:docs": "npm run docs && gh-pages --dest account-compression/sdk --dist docs --dotfiles",
-    "start-validator": "solana-test-validator --reset --quiet --bpf-program mcmt6YrQEMKw8Mw43FmpRLmf7BqRnFMKmAcbxE3xkAW ../target/deploy/mpl_account_compression.so --bpf-program mnoopTCrg4p8ry25e4bcWA9XZjbNjMTfgYVGGEdRsf3 ../target/deploy/mpl_noop.so --account 27QMkDMpBoAhmWj6xxQNYdqXZL5nnC8tkZcEtkNxCqeX pre-batch-init-tree-account.json",
+    "start-validator": "solana-test-validator --reset --quiet --bpf-program mcmt6YrQEMKw8Mw43FmpRLmf7BqRnFMKmAcbxE3xkAW ../target/deploy/mpl_account_compression.so --bpf-program mnoopTCrg4p8ry25e4bcWA9XZjbNjMTfgYVGGEdRsf3 ../target/deploy/mpl_noop.so",
     "run-tests": "jest tests --detectOpenHandles",
     "run-tests:events": "jest tests/events --detectOpenHandles",
     "run-tests:accounts": "jest tests/accounts --detectOpenHandles",
