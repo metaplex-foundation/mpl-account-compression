@@ -1,7 +1,9 @@
 [workspace]
 members = [
     "programs/account-compression",
-    "programs/noop"
+    "programs/noop",
+    "libraries/concurrent-merkle-tree",
+    "libraries/merkle-tree-reference",
 ]
 
 resolver = "2"
