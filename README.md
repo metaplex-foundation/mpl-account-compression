@@ -19,6 +19,12 @@ This repo is a modified fork of the [original repository](https://github.com/sol
 * `mpl-account-compression`: SDK for interacting with account compression program
 * `mpl-noop`: SDK for interacting with no op program, primarily for circumventing log truncation
 
+### Tools
+Currently no CI.  What is deployed on Solana mainnet-beta, Eclipse mainnet, and Sonic mainnet is tagged as `20250513_mainnet`.  It was built on 5/13/2025 on an Ubuntu 20.04.6 LTS box, using:
+* solana-cli 1.18.15 (src:7696b273; feat:4215500110, client:Agave)
+* rustc 1.82.0 (f6e511eec 2024-10-15)
+* anchor-cli 0.29.0
+
 ### Building the Rust Packages
 
 From the sdk directory of the repository:
