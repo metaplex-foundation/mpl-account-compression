@@ -20,10 +20,10 @@ This repo is a modified fork of the [original repository](https://github.com/sol
 * `mpl-noop`: SDK for interacting with no op program, primarily for circumventing log truncation
 
 ### Tools
-Currently no CI.  What is deployed on Solana mainnet-beta, Eclipse mainnet, and Sonic mainnet is tagged as `20250513_mainnet`.  It was built on 5/13/2025 on an Ubuntu 20.04.6 LTS box, using:
-* solana-cli 1.18.15 (src:7696b273; feat:4215500110, client:Agave)
+Currently no CI.  Note that this is not functional, it is just a placeholder to create a 2.0.0 compatible SDK.  The mpl-account-compression and mpl-noop crates were published on 5/28/2025 on an Ubuntu 20.04.6 LTS box, using:
+* solana-cli 2.0.24 (src:336796a7; feat:607245837, client:Agave)
 * rustc 1.82.0 (f6e511eec 2024-10-15)
-* anchor-cli 0.29.0
+* anchor-cli 0.31.1
 
 ### Building the Rust Packages
 

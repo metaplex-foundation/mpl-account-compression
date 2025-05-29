@@ -1,4 +1,3 @@
-//! SPL Account Compression is an on-chain program that exposes an interface to manipulating SPL ConcurrentMerkleTrees
 //!
 //! A buffer of proof-like changelogs is stored on-chain that allow multiple proof-based writes to succeed within the same slot.
 //! This is accomplished by fast-forwarding out-of-date (or possibly invalid) proofs based on information stored in the changelogs.
@@ -22,6 +21,7 @@
 //! All modifications to SPL ConcurrentMerkleTrees are settled on the Solana ledger via instructions against the SPL Compression contract.
 //! A production-ready indexer (Plerkle) can be found in the [Metaplex program library](https://github.com/metaplex-foundation/digital-asset-validator-plugin)
 
+// Note that this is not functional, it is just a placeholder to create a 2.0.0 compatible SDK
 use anchor_lang::{
     prelude::*,
     solana_program::sysvar::{clock::Clock, rent::Rent},
@@ -61,7 +61,7 @@ declare_id!("mcmt6YrQEMKw8Mw43FmpRLmf7BqRnFMKmAcbxE3xkAW");
 /// Context for initializing a new SPL ConcurrentMerkleTree
 #[derive(Accounts)]
 pub struct Initialize<'info> {
-    #[account(zero)]
+    // #[account(zero)]
     /// CHECK: This account will be zeroed out, and the size will be validated
     pub merkle_tree: UncheckedAccount<'info>,
 

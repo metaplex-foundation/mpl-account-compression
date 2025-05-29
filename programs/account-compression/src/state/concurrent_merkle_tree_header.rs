@@ -24,6 +24,9 @@ impl std::fmt::Display for CompressionAccountType {
     }
 }
 
+#[cfg(feature = "idl-build")]
+impl anchor_lang::IdlBuild for CompressionAccountType {}
+
 /// Initialization parameters for an SPL ConcurrentMerkleTree.
 ///
 /// Only the following permutations are valid:
