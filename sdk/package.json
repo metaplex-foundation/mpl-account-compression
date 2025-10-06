@@ -1,93 +1,93 @@
 {
-  "name": "@metaplex-foundation/mpl-account-compression",
-  "description": "Metaplex Fork of Solana Program Library Account Compression Program JS SDK",
-  "version": "0.4.1",
-  "author": "Metaplex Developers <dev@metaplex.com>",
-  "repository": {
-    "url": "https://github.com/metaplex-foundation/mpl-account-compression",
-    "type": "git"
-  },
-  "license": "Apache-2.0",
-  "sideEffects": false,
-  "engines": {
-    "node": ">=16"
-  },
-  "files": [
-    "dist",
-    "src",
-    "idl",
-    "README.md"
-  ],
-  "publishConfig": {
-    "access": "public"
-  },
-  "main": "./dist/cjs/index.js",
-  "module": "./dist/cjs/index.js",
-  "types": "./dist/types/index.d.ts",
-  "exports": {
-    ".": {
-      "types": "./dist/types/index.d.ts",
-      "require": "./dist/cjs/index.js",
-      "import": "./dist/cjs/index.js"
+    "name": "@metaplex-foundation/mpl-account-compression",
+    "description": "Metaplex Fork of Solana Program Library Account Compression Program JS SDK",
+    "version": "0.4.1",
+    "author": "Metaplex Developers <dev@metaplex.com>",
+    "repository": {
+        "url": "https://github.com/metaplex-foundation/mpl-account-compression",
+        "type": "git"
     },
-    "./idl/mpl_account_compression.json": "./idl/mpl_account_compression.json"
-  },
-  "scripts": {
-    "build": "rm -rf dist/ && tsc -p tsconfig.json",
-    "build:program": "cargo build-sbf --manifest-path=../programs/account-compression/Cargo.toml && cargo build-sbf --manifest-path=../programs/noop/Cargo.toml",
-    "generate": "DEBUG='(solita|rustbin):(info|error)' solita",
-    "lint": "set -ex; eslint . --ext .js,.ts",
-    "lint:fix": "eslint . --fix --ext .js,.ts",
-    "docs": "rm -rf docs/ && typedoc --out docs",
-    "deploy:docs": "npm run docs && gh-pages --dest account-compression/sdk --dist docs --dotfiles",
-    "start-validator": "solana-test-validator --reset --quiet --bpf-program mcmt6YrQEMKw8Mw43FmpRLmf7BqRnFMKmAcbxE3xkAW ../target/deploy/mpl_account_compression.so --bpf-program mnoopTCrg4p8ry25e4bcWA9XZjbNjMTfgYVGGEdRsf3 ../target/deploy/mpl_noop.so",
-    "run-tests": "jest tests --detectOpenHandles",
-    "run-tests:events": "jest tests/events --detectOpenHandles",
-    "run-tests:accounts": "jest tests/accounts --detectOpenHandles",
-    "run-tests:e2e": "jest accountCompression.test.ts --detectOpenHandles",
-    "test:events": "start-server-and-test start-validator http://127.0.0.1:8899/health run-tests:events",
-    "test:accounts": "start-server-and-test start-validator http://127.0.0.1:8899/health run-tests:accounts",
-    "test:e2e": "start-server-and-test start-validator http://127.0.0.1:8899/health run-tests:e2e",
-    "test:merkle-tree": "jest tests/merkleTree.test.ts --detectOpenHandles",
-    "test": "start-server-and-test start-validator http://127.0.0.1:8899/health run-tests"
-  },
-  "dependencies": {
-    "@metaplex-foundation/beet": "^0.7.2",
-    "@metaplex-foundation/beet-solana": "^0.4.1",
-    "bn.js": "^5.2.1",
-    "js-sha3": "^0.9.3",
-    "typescript-collections": "^1.3.3"
-  },
-  "peerDependencies": {
-    "@solana/web3.js": "^1.95.2"
-  },
-  "devDependencies": {
-    "@coral-xyz/anchor": "^0.29.0",
-    "@metaplex-foundation/rustbin": "^0.3.5",
-    "@metaplex-foundation/solita": "0.20.1",
-    "@solana/eslint-config-solana": "^3.0.3",
-    "@types/bn.js": "^5.1.6",
-    "@types/jest": "^29.5.13",
-    "@types/node": "^22.7.5",
-    "@types/node-fetch": "^2.6.11",
-    "@typescript-eslint/eslint-plugin": "^7.18.0",
-    "@typescript-eslint/parser": "^7.18.0",
-    "eslint": "^8.57.0",
-    "eslint-config-turbo": "^2.1.3",
-    "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-jest": "^27.9.0",
-    "eslint-plugin-mocha": "^10.5.0",
-    "eslint-plugin-simple-import-sort": "^12.1.1",
-    "eslint-plugin-sort-keys-fix": "^1.1.2",
-    "gh-pages": "^6.2.0",
-    "jest": "^29.0.1",
-    "jest-config": "^29.0.1",
-    "start-server-and-test": "^2.0.8",
-    "ts-jest": "^29.2.5",
-    "ts-jest-resolver": "^2.0.1",
-    "ts-node": "^10.9.2",
-    "typedoc": "^0.26.8",
-    "typescript": "5.5.4"
-  },
-  "packageManager": "pnpm@8.15.9+sha512.499434c9d8fdd1a2794ebf4552b3b25c0a633abcee5bb15e7b5de90f32f47b513aca98cd5cfd001c31f0db454bc3804edccd578501e4ca293a6816166bbd9f81"
+    "license": "Apache-2.0",
+    "sideEffects": false,
+    "engines": {
+        "node": ">=16"
+    },
+    "files": [
+        "dist",
+        "src",
+        "idl",
+        "README.md"
+    ],
+    "publishConfig": {
+        "access": "public"
+    },
+    "main": "./dist/cjs/index.js",
+    "module": "./dist/cjs/index.js",
+    "types": "./dist/types/index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./dist/types/index.d.ts",
+            "require": "./dist/cjs/index.js",
+            "import": "./dist/cjs/index.js"
+        },
+        "./idl/mpl_account_compression.json": "./idl/mpl_account_compression.json"
+    },
+    "scripts": {
+        "build": "rm -rf dist/ && tsc -p tsconfig.json",
+        "build:program": "cargo build-sbf --manifest-path=../programs/account-compression/Cargo.toml && cargo build-sbf --manifest-path=../programs/noop/Cargo.toml",
+        "generate": "DEBUG='(solita|rustbin):(info|error)' solita",
+        "lint": "set -ex; eslint . --ext .js,.ts",
+        "lint:fix": "eslint . --fix --ext .js,.ts",
+        "docs": "rm -rf docs/ && typedoc --out docs",
+        "deploy:docs": "npm run docs && gh-pages --dest account-compression/sdk --dist docs --dotfiles",
+        "start-validator": "solana-test-validator --reset --quiet --bpf-program mcmt6YrQEMKw8Mw43FmpRLmf7BqRnFMKmAcbxE3xkAW ../target/deploy/mpl_account_compression.so --bpf-program mnoopTCrg4p8ry25e4bcWA9XZjbNjMTfgYVGGEdRsf3 ../target/deploy/mpl_noop.so",
+        "run-tests": "jest tests --detectOpenHandles",
+        "run-tests:events": "jest tests/events --detectOpenHandles",
+        "run-tests:accounts": "jest tests/accounts --detectOpenHandles",
+        "run-tests:e2e": "jest accountCompression.test.ts --detectOpenHandles",
+        "test:events": "start-server-and-test start-validator http://127.0.0.1:8899/health run-tests:events",
+        "test:accounts": "start-server-and-test start-validator http://127.0.0.1:8899/health run-tests:accounts",
+        "test:e2e": "start-server-and-test start-validator http://127.0.0.1:8899/health run-tests:e2e",
+        "test:merkle-tree": "jest tests/merkleTree.test.ts --detectOpenHandles",
+        "test": "start-server-and-test start-validator http://127.0.0.1:8899/health run-tests"
+    },
+    "dependencies": {
+        "@metaplex-foundation/beet": "^0.7.2",
+        "@metaplex-foundation/beet-solana": "^0.4.1",
+        "bn.js": "^5.2.1",
+        "js-sha3": "^0.9.3",
+        "typescript-collections": "^1.3.3"
+    },
+    "peerDependencies": {
+        "@solana/web3.js": "^1.95.2"
+    },
+    "devDependencies": {
+        "@coral-xyz/anchor": "^0.29.0",
+        "@metaplex-foundation/rustbin": "^0.3.5",
+        "@metaplex-foundation/solita": "0.20.1",
+        "@solana/eslint-config-solana": "^3.0.3",
+        "@types/bn.js": "^5.1.6",
+        "@types/jest": "^29.5.13",
+        "@types/node": "^22.7.5",
+        "@types/node-fetch": "^2.6.11",
+        "@typescript-eslint/eslint-plugin": "^7.18.0",
+        "@typescript-eslint/parser": "^7.18.0",
+        "eslint": "^8.57.0",
+        "eslint-config-turbo": "^2.1.3",
+        "eslint-plugin-import": "^2.31.0",
+        "eslint-plugin-jest": "^27.9.0",
+        "eslint-plugin-mocha": "^10.5.0",
+        "eslint-plugin-simple-import-sort": "^12.1.1",
+        "eslint-plugin-sort-keys-fix": "^1.1.2",
+        "gh-pages": "^6.2.0",
+        "jest": "^29.0.1",
+        "jest-config": "^29.0.1",
+        "start-server-and-test": "^2.0.8",
+        "ts-jest": "^29.2.5",
+        "ts-jest-resolver": "^2.0.1",
+        "ts-node": "^10.9.2",
+        "typedoc": "^0.26.8",
+        "typescript": "5.5.4"
+    },
+    "packageManager": "pnpm@8.15.9+sha512.499434c9d8fdd1a2794ebf4552b3b25c0a633abcee5bb15e7b5de90f32f47b513aca98cd5cfd001c31f0db454bc3804edccd578501e4ca293a6816166bbd9f81"
 }
