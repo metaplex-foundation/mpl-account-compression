@@ -8,7 +8,7 @@ use crate::error::AccountCompressionError;
 
 pub const CONCURRENT_MERKLE_TREE_HEADER_SIZE_V1: usize = 2 + 54;
 
-#[derive(Debug, Copy, Clone, PartialEq, BorshDeserialize, BorshSerialize)]
+#[derive(Debug, Copy, Clone, PartialEq, AnchorDeserialize, AnchorSerialize)]
 #[repr(u8)]
 pub enum CompressionAccountType {
     /// Uninitialized
