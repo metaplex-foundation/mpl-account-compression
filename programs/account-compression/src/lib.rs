@@ -24,7 +24,7 @@
 
 use anchor_lang::{
     prelude::*,
-    solana_program::sysvar::{clock::Clock, rent::Rent},
+    solana_program::clock::Clock,
 };
 use borsh::{BorshDeserialize, BorshSerialize};
 
@@ -61,7 +61,7 @@ declare_id!("mcmt6YrQEMKw8Mw43FmpRLmf7BqRnFMKmAcbxE3xkAW");
 /// Context for initializing a new SPL ConcurrentMerkleTree
 #[derive(Accounts)]
 pub struct Initialize<'info> {
-    #[account(zero)]
+    #[account(mut)]
     /// CHECK: This account will be zeroed out, and the size will be validated
     pub merkle_tree: UncheckedAccount<'info>,
 
