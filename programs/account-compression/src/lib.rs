@@ -46,7 +46,8 @@ pub use crate::error::AccountCompressionError;
 pub use crate::events::{AccountCompressionEvent, ChangeLogEvent};
 use crate::noop::wrap_event;
 use crate::state::{
-    merkle_tree_get_size, ConcurrentMerkleTreeHeader, CONCURRENT_MERKLE_TREE_HEADER_SIZE_V1,
+    merkle_tree_get_size, CompressionAccountType, ConcurrentMerkleTreeHeader,
+    CONCURRENT_MERKLE_TREE_HEADER_SIZE_V1,
 };
 
 /// Exported for Anchor / Solita
@@ -158,6 +159,11 @@ pub mod mpl_account_compression {
             merkle_tree_bytes.split_at_mut(CONCURRENT_MERKLE_TREE_HEADER_SIZE_V1);
 
         let mut header = ConcurrentMerkleTreeHeader::try_from_slice(header_bytes)?;
+        require_eq!(
+            header.account_type,
+            CompressionAccountType::Uninitialized,
+            AccountCompressionError::IncorrectAccountType
+        );
         header.initialize(
             max_depth,
             max_buffer_size,
