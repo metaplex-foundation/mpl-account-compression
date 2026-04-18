@@ -167,6 +167,16 @@ pub mod mpl_account_compression {
             CompressionAccountType::Uninitialized,
             AccountCompressionError::IncorrectAccountType
         );
+        require_eq!(
+            header.get_max_depth(),
+            0,
+            AccountCompressionError::IncorrectAccountType
+        );
+        require_eq!(
+            header.get_max_buffer_size(),
+            0,
+            AccountCompressionError::IncorrectAccountType
+        );
         header.initialize(
             max_depth,
             max_buffer_size,
