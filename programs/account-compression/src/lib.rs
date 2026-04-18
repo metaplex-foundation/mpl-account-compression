@@ -24,7 +24,7 @@
 
 use anchor_lang::{
     prelude::*,
-    solana_program::clock::Clock,
+    solana_program::{clock::Clock, program_error::ProgramError},
 };
 use borsh::{BorshDeserialize, BorshSerialize};
 
@@ -154,6 +154,9 @@ pub mod mpl_account_compression {
             AccountCompressionError::IncorrectAccountOwner
         );
         let mut merkle_tree_bytes = ctx.accounts.merkle_tree.try_borrow_mut_data()?;
+        if merkle_tree_bytes.len() < CONCURRENT_MERKLE_TREE_HEADER_SIZE_V1 {
+            return Err(ProgramError::InvalidAccountData.into());
+        }
 
         let (mut header_bytes, rest) =
             merkle_tree_bytes.split_at_mut(CONCURRENT_MERKLE_TREE_HEADER_SIZE_V1);
@@ -173,6 +176,9 @@ pub mod mpl_account_compression {
         header.serialize(&mut header_bytes)?;
 
         let merkle_tree_size = merkle_tree_get_size(&header)?;
+        if rest.len() < merkle_tree_size {
+            return Err(ProgramError::InvalidAccountData.into());
+        }
         let (tree_bytes, canopy_bytes) = rest.split_at_mut(merkle_tree_size);
         let id = ctx.accounts.merkle_tree.key();
 
