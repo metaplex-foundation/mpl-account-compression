@@ -63,7 +63,7 @@ declare_id!("mcmt6YrQEMKw8Mw43FmpRLmf7BqRnFMKmAcbxE3xkAW");
 #[derive(Accounts)]
 pub struct Initialize<'info> {
     #[account(mut)]
-    /// CHECK: This account will be zeroed out, and the size will be validated
+    /// CHECK: Marked with #[account(mut)]; zeroing and size validation are enforced in init_empty_merkle_tree.
     pub merkle_tree: UncheckedAccount<'info>,
 
     /// Authority that controls write-access to the tree
