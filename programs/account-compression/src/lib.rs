@@ -157,6 +157,10 @@ pub mod mpl_account_compression {
         if merkle_tree_bytes.len() < CONCURRENT_MERKLE_TREE_HEADER_SIZE_V1 {
             return Err(ProgramError::InvalidAccountData.into());
         }
+        require!(
+            merkle_tree_bytes.iter().all(|byte| *byte == 0),
+            AccountCompressionError::IncorrectAccountType
+        );
 
         let (mut header_bytes, rest) =
             merkle_tree_bytes.split_at_mut(CONCURRENT_MERKLE_TREE_HEADER_SIZE_V1);
