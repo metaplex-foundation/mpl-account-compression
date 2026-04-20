@@ -1,6 +1,6 @@
 [package]
 name = "mpl-account-compression"
-version = "0.4.2"
+version = "2.0.0"
 description = "Metaplex Fork of Solana Program Library Account Compression Program"
 authors = ["Metaplex Developers <dev@metaplex.com>"]
 repository = "https://github.com/metaplex-foundation/mpl-account-compression"
@@ -21,7 +21,7 @@ default = []
 anchor-lang = "1.0.0"
 borsh = "1"
 bytemuck = "1.13"
-mpl-noop = { version = "0.2.1", path = "../noop", features = ["no-entrypoint"] }
+mpl-noop = { version = "2.0.0", path = "../noop", features = ["no-entrypoint"] }
 solana-program = "3.0.0"
 spl-concurrent-merkle-tree = { version = "0.3.0", path = "../../libraries/concurrent-merkle-tree" }
 [profile.release]

@@ -827,7 +827,7 @@ dependencies = [
 
 [[package]]
 name = "mpl-account-compression"
-version = "0.4.2"
+version = "2.0.0"
 dependencies = [
  "anchor-lang",
  "borsh",
@@ -839,7 +839,7 @@ dependencies = [
 
 [[package]]
 name = "mpl-noop"
-version = "0.2.1"
+version = "2.0.0"
 dependencies = [
  "solana-program",
 ]

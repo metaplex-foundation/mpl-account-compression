@@ -1,6 +1,6 @@
 [package]
 name = "mpl-noop"
-version = "0.2.1"
+version = "2.0.0"
 description = "Metaplex Fork of Solana Program Library No-op Program"
 authors = ["Metaplex Developers <dev@metaplex.com>"]
 repository = "https://github.com/metaplex-foundation/mpl-account-compression"
