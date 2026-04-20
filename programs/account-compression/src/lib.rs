@@ -24,7 +24,7 @@
 
 use anchor_lang::{
     prelude::*,
-    solana_program::sysvar::{clock::Clock, rent::Rent},
+    solana_program::{clock::Clock, program_error::ProgramError},
 };
 use borsh::{BorshDeserialize, BorshSerialize};
 
@@ -46,7 +46,8 @@ pub use crate::error::AccountCompressionError;
 pub use crate::events::{AccountCompressionEvent, ChangeLogEvent};
 use crate::noop::wrap_event;
 use crate::state::{
-    merkle_tree_get_size, ConcurrentMerkleTreeHeader, CONCURRENT_MERKLE_TREE_HEADER_SIZE_V1,
+    merkle_tree_get_size, CompressionAccountType, ConcurrentMerkleTreeHeader,
+    CONCURRENT_MERKLE_TREE_HEADER_SIZE_V1,
 };
 
 /// Exported for Anchor / Solita
@@ -61,8 +62,8 @@ declare_id!("mcmt6YrQEMKw8Mw43FmpRLmf7BqRnFMKmAcbxE3xkAW");
 /// Context for initializing a new SPL ConcurrentMerkleTree
 #[derive(Accounts)]
 pub struct Initialize<'info> {
-    #[account(zero)]
-    /// CHECK: This account will be zeroed out, and the size will be validated
+    #[account(mut)]
+    /// CHECK: Marked with #[account(mut)]; zeroing and size validation are enforced in init_empty_merkle_tree.
     pub merkle_tree: UncheckedAccount<'info>,
 
     /// Authority that controls write-access to the tree
@@ -153,11 +154,33 @@ pub mod mpl_account_compression {
             AccountCompressionError::IncorrectAccountOwner
         );
         let mut merkle_tree_bytes = ctx.accounts.merkle_tree.try_borrow_mut_data()?;
+        if merkle_tree_bytes.len() < CONCURRENT_MERKLE_TREE_HEADER_SIZE_V1 {
+            return Err(ProgramError::InvalidAccountData.into());
+        }
+        require!(
+            merkle_tree_bytes.iter().all(|byte| *byte == 0),
+            AccountCompressionError::IncorrectAccountType
+        );
 
         let (mut header_bytes, rest) =
             merkle_tree_bytes.split_at_mut(CONCURRENT_MERKLE_TREE_HEADER_SIZE_V1);
 
         let mut header = ConcurrentMerkleTreeHeader::try_from_slice(header_bytes)?;
+        require_eq!(
+            header.account_type,
+            CompressionAccountType::Uninitialized,
+            AccountCompressionError::IncorrectAccountType
+        );
+        require_eq!(
+            header.get_max_depth(),
+            0,
+            AccountCompressionError::IncorrectAccountType
+        );
+        require_eq!(
+            header.get_max_buffer_size(),
+            0,
+            AccountCompressionError::IncorrectAccountType
+        );
         header.initialize(
             max_depth,
             max_buffer_size,
@@ -167,6 +190,9 @@ pub mod mpl_account_compression {
         header.serialize(&mut header_bytes)?;
 
         let merkle_tree_size = merkle_tree_get_size(&header)?;
+        if rest.len() < merkle_tree_size {
+            return Err(ProgramError::InvalidAccountData.into());
+        }
         let (tree_bytes, canopy_bytes) = rest.split_at_mut(merkle_tree_size);
         let id = ctx.accounts.merkle_tree.key();
 
