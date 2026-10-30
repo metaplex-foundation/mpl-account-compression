@@ -14,7 +14,7 @@ permissions: {}
 jobs:
   changes:
     name: Detect changes
-    uses: metaplex-foundation/actions/.github/workflows/detect-changes.yml@8f4db07ffb2abc0ac10bbe94f5dc623eb2218641 # v2.0.0
+    uses: metaplex-foundation/actions/.github/workflows/detect-changes.yml@da62cf9659efdd4e28daa0c777535ea5f54ab53a # v2.0.0
     permissions:
       contents: read
       pull-requests: read
@@ -23,7 +23,7 @@ jobs:
     name: Programs
     if: needs.changes.outputs.programs == 'true'
     needs: changes
-    uses: metaplex-foundation/actions/.github/workflows/build-programs.yml@8f4db07ffb2abc0ac10bbe94f5dc623eb2218641 # v2.0.0
+    uses: metaplex-foundation/actions/.github/workflows/build-programs.yml@da62cf9659efdd4e28daa0c777535ea5f54ab53a # v2.0.0
     permissions:
       contents: read
 
@@ -31,7 +31,7 @@ jobs:
     name: Programs
     if: needs.changes.outputs.programs == 'true'
     needs: changes
-    uses: metaplex-foundation/actions/.github/workflows/test-programs.yml@8f4db07ffb2abc0ac10bbe94f5dc623eb2218641 # v2.0.0
+    uses: metaplex-foundation/actions/.github/workflows/test-programs.yml@da62cf9659efdd4e28daa0c777535ea5f54ab53a # v2.0.0
     permissions:
       contents: read
     with:
