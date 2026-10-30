@@ -14,6 +14,7 @@
 #
 #   PROGRAM=account-compression configs/scripts/program/test.sh [cargo test args...]
 #   configs/scripts/program/test.sh noop [cargo test args...]
+# The program names accepted on the command line are the cases in packages_for.
 
 set -euo pipefail
 
@@ -34,10 +35,15 @@ fi
 # default to input from the command-line
 ARGS=("$@")
 
-# command-line arguments override env variable
+# A first argument that names a program overrides PROGRAM/PROGRAMS; anything
+# else (for example `-- --nocapture`) is passed through to cargo test.
 if [ $# -gt 0 ]; then
-    PROGRAMS="[\"${1}\"]"
-    shift
+    case "$1" in
+        account-compression|noop)
+            PROGRAMS="[\"${1}\"]"
+            shift
+            ;;
+    esac
     ARGS=("$@")
 fi
 
@@ -63,8 +69,11 @@ packages_for() {
 }
 
 while IFS= read -r p; do
+    # Assigned on its own so an unknown program stops the script (set -e)
+    # instead of running `cargo test` for the whole workspace.
+    packages="$(packages_for "${p}")"
     PACKAGE_ARGS=()
-    for pkg in $(packages_for "${p}"); do
+    for pkg in $packages; do
         PACKAGE_ARGS+=(--package "${pkg}")
     done
     echo "Testing ${p}: ${PACKAGE_ARGS[*]}"
