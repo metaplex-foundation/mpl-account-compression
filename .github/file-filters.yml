@@ -1,0 +1,56 @@
+# This file is used by the dorny/paths-filter action to figure out if a program or
+# client has changed and thus if it should be built or tested. Any changes in the
+# files listed below will trigger the appropriate workflow for that program or client.
+
+# Programs.
+
+# Both programs are members of the root Cargo workspace and share its lock file.
+program_common: &program_common
+  - ".github/workflows/main.yml"
+  - ".github/file-filters.yml"
+  - ".github/programs.json"
+  - ".github/.env"
+  - "configs/scripts/program/**"
+  - "Cargo.toml"
+  - "Cargo.lock"
+
+# mpl-account-compression depends on mpl-noop and on the merkle-tree libraries
+# by path, so a change to either must rebuild and retest it.
+account_compression_program: &account_compression_program
+  - *program_common
+  - "programs/account-compression/**"
+  - "programs/noop/**"
+  - "libraries/**"
+
+noop_program: &noop_program
+  - *program_common
+  - "programs/noop/**"
+
+programs: &programs
+  - *account_compression_program
+  - *noop_program
+
+# Clients.
+
+client_common: &client_common
+  - *programs
+  - ".github/workflows/main.yml"
+  - ".github/file-filters.yml"
+  - ".github/programs.json"
+  - ".github/.env"
+  - "configs/scripts/client/**"
+
+# The Solita-generated TypeScript SDK under sdk/. No workflow consumes this
+# filter yet (see the README for how its tests are run by hand).
+js_client: &js_client
+  - *client_common
+  - "sdk/**"
+
+clients: &clients
+  - *js_client
+
+# Any.
+
+any: &any
+  - *programs
+  - *clients

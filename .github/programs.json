@@ -1,0 +1,17 @@
+{
+  "$comment": "Program descriptors for the shared CI in metaplex-foundation/actions. Toolchain pins live in .github/.env.",
+  "programs": [
+    {
+      "name": "account-compression",
+      "package": "mpl-account-compression",
+      "library": "mpl_account_compression",
+      "build": "sbf"
+    },
+    {
+      "name": "noop",
+      "package": "mpl-noop",
+      "library": "mpl_noop",
+      "build": "sbf"
+    }
+  ]
+}
