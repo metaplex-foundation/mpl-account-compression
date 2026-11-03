@@ -24,7 +24,10 @@ pub fn wrap_event<'info>(
     event: &AccountCompressionEvent,
     noop_program: &Program<'info, Noop>,
 ) -> Result<()> {
-    invoke(&mpl_noop::instruction(to_vec(event)?), &[noop_program.to_account_info()])?;
+    invoke(
+        &mpl_noop::instruction(to_vec(event)?),
+        &[noop_program.to_account_info()],
+    )?;
     Ok(())
 }
 

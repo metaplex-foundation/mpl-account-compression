@@ -1,0 +1,38 @@
+name: Main
+
+# Thin orchestrator over the shared workflows in metaplex-foundation/actions.
+# Repository facts live in .github/.env (toolchain pins), .github/programs.json
+# (program descriptors) and .github/file-filters.yml (change detection).
+
+on:
+  push:
+    branches: [main]
+  pull_request: {}
+
+permissions: {}
+
+jobs:
+  changes:
+    name: Detect changes
+    uses: metaplex-foundation/actions/.github/workflows/detect-changes.yml@8fcadb6df757cba34aa8475373886eca9b6ce8cf # v2.0.1
+    permissions:
+      contents: read
+      pull-requests: read
+
+  build_programs:
+    name: Programs
+    if: needs.changes.outputs.programs == 'true'
+    needs: changes
+    uses: metaplex-foundation/actions/.github/workflows/build-programs.yml@8fcadb6df757cba34aa8475373886eca9b6ce8cf # v2.0.1
+    permissions:
+      contents: read
+
+  test_programs:
+    name: Programs
+    if: needs.changes.outputs.programs == 'true'
+    needs: changes
+    uses: metaplex-foundation/actions/.github/workflows/test-programs.yml@8fcadb6df757cba34aa8475373886eca9b6ce8cf # v2.0.1
+    permissions:
+      contents: read
+    with:
+      program_matrix: ${{ needs.changes.outputs.program_matrix }}
