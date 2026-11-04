@@ -25,6 +25,11 @@ Currently no CI.  What is deployed on Solana mainnet-beta, Eclipse mainnet, and 
 * rustc 1.82.0 (f6e511eec 2024-10-15)
 * anchor-cli 0.29.0
 
+The last crate publish (`mpl-account-compression` 2.0.0 and `mpl-noop` 2.0.0) used:
+* rustc 1.89.0 (29483883e 2025-08-04)
+* solana-cli 3.1.13 (src:437252fc; feat:534737035, client:Agave)
+* anchor-cli 1.0.0
+
 ### Building the Rust Packages
 
 From the sdk directory of the repository:
